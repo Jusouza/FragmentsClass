@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         val button = binding.button
 
         button.setOnClickListener {
-            navController.navigate(R.id.action_firstFragment_to_secondFragment2)
+           val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment2("Juliana Souza", 27)
+            navController.navigate(action)
         }
     }
 }
