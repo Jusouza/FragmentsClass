@@ -3,25 +3,23 @@ package com.example.fragmentsclass
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.navigation.fragment.NavHostFragment
+import com.example.fragmentsclass.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val button = findViewById<Button>(R.id.button)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHost.navController
+
+        val button = binding.button
 
         button.setOnClickListener {
-            val secondFragment = SecondFragment()
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container_view, secondFragment)
-            fragmentTransaction.commit()
+            navController.navigate(R.id.action_firstFragment_to_secondFragment2)
         }
-
-        val firstFragment = FirstFragment.newInstance("Juliana", "Souza")
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.fragment_container_view, firstFragment)
-        fragmentTransaction.commit()
     }
 }
